@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="function.js"></script>
+    <script src="jquery.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body onload="initFunc()">
+  <!-- <body> -->
+    <div id="background" class="background" onclick="closeFunc()"> </div>
+
+    <form>
+
+      <div id="title" class="title">企业聚类结果查询</div>
+
+      <div id="form-box" class="form-box">
+
+        <input type="text" id="search-field" class="search-field business" placeholder="在此输入公司名称..."
+          oninput="value=value.replace(/[^\w_, ]/g,'')" onclick="clearFunc()" checked="checked" required="required" />
+
+        <button type="button" id="predict-btn" class="predict-btn" onclick="predictFunc()">
+          <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i>
+        </button>
+        <div id="predict-hint" class="predict-hint">
+          输入公司的若干属性值，<br />给出所属标签。
+        </div>
+
+        <button type="button" id="search-btn" class="search-btn" onclick="searchFunc()" disabled="disabled">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+
+        <div id="hint-txt" class="hint-txt">输入多个公司名称时请用逗号隔开，同时查询最多支持5个公司。</div>
+
+      </div>
+
+      <div id="valueBox" class="valueBox">
+
+        <button type="button" class="close-btn" onclick="closeFunc()">
+          <i class="fa fa-minus"></i>
+        </button>
+
+        <div id="Input-0" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(0)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-1" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(1)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-2" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(2)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-3" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(3)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-4" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(4)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-5" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(5)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-6" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(6)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-7" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(7)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-8" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(8)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-9" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(9)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-10" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(10)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-11" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(11)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-12" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(12)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-13" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(13)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-14" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(14)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-15" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(15)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-16" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(16)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-17" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(17)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-18" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(18)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-19" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(19)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-20" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(20)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+        </div>
+        <div id="Input-21" class="Input">
+          <select class="attrInput" list="attrList" onchange="changeFunc(21)">
+            <option value="passpercent">passpercent</option>
+            <option value="bidnum">bidnum</option>
+            <option value="is_infob">is_infob</option>
+            <option value="is_infoa_2">is_infoa_2</option>
+            <option value="is_justice_creditaic">is_justice_creditaic</option>
+            <option value="is_justice_credit">is_justice_credit</option>
+            <option value="nega_is_kcont">nega_is_kcont</option>
+            <option value="icopy_num">icopy_num</option>
+            <option value="ipat_num">ipat_num</option>
+            <option value="ibrand_num">ibrand_num</option>
+            <option value="idom_num">idom_num</option>
+            <option value="sum">sum</option>
+            <option value="shopnum">shopnum</option>
+            <option value="is_bra">is_bra</option>
+            <option value="pledgenum">pledgenum</option>
+            <option value="taxunpaidnum">taxunpaidnum</option>
+            <option value="priclasecam">priclasecam</option>
+            <option value="is_bp">is_bp</option>
+            <option value="regcap">regcap</option>
+            <option value="investnum">investnum</option>
+            <option value="branchnum">branchnum</option>
+            <option value="empnum">empnum</option>
+          </select>
+          <span> </span>
+          <input type="text" class="valueInput" placeholder="属性值" oninput="value=value.replace(/[^\d]/g,'')" />
+          <button type="button" class="plus-btn" onclick="addFunc()">
+            <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="minus-btn" onclick="delFunc()">
+            <i class="fa fa-minus fa-2x" aria-hidden="true"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <div id="search-info" class="search-info">
+
+        <button type="button" class="close-btn" onclick="closeFunc()">
+          <i class="fa fa-minus"></i>
+        </button>
+
+        <div>
+          <ul>
+            <li id="tab1"><a id="coop1" onclick="tabFunc(1)"></a></li>
+            <li id="tab2"><a id="coop2" onclick="tabFunc(2)"></a></li>
+            <li id="tab3"><a id="coop3" onclick="tabFunc(3)"></a></li>
+            <li id="tab4"><a id="coop4" onclick="tabFunc(4)"></a></li>
+            <li id="tab5"><a id="coop5" onclick="tabFunc(5)"></a></li>
+          </ul>
+        </div>
+
+        <div class="infoHolder">
+          <h1 id="coopName"></h1>
+          <p id="tag1" class="tags"></p>
+          <p id="tag2" class="tags"></p>
+          <p id="tag3" class="tags"></p>
+          <p id="tag4" class="tags"></p>
+          <p id="tag5" class="tags"></p>
+          <p id="tag6" class="tags"></p>
+        </div>
+
+      </div>
+
+    </form>
+
+
+  </body>
+
+</html>

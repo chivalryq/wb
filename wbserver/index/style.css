@@ -1,0 +1,235 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+body .background {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://www.chival.xyz:444/index/background.jpg);
+  height: 989px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  font-family: 'Optima', 'Hei';
+}
+
+body form{
+  font-family: 'Optima', 'Hei';
+}
+body form .title {
+  font-size: 36px;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.75);
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: .4s;
+}
+
+body form .form-box {
+  padding-left: 20px;
+  width: 440px;
+  height: 40px;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: .4s;
+  border-radius: 40px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+}
+body form .form-box .search-field {
+  width: 400px;
+  height: 40px;
+  padding: 0%;
+  border: 0;
+  font-size: 12px;
+  background: none;
+  outline: none;
+  transition: .4s;
+  color: #ffffff;
+  font-family: 'Optima';
+  align-items: center;
+}
+body form .form-box .predict-btn {
+  background-color: rgba(0, 0, 0, 0);
+  color: #ffffff;
+  border: none;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 50%;
+  right: 8%;
+  transform: translate(0, -50%);
+  justify-content: center;
+  align-items: center;
+}
+body form .form-box .predict-btn:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.2);
+}
+body form .form-box .predict-hint {
+  display: none;
+  font-family: 'Optima', 'Hei';
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  text-align: left;
+  letter-spacing: 1px;
+  width: 12em;
+  position: absolute;
+  top: 120%;
+  left: 100%;
+  transform: translate(-40%);
+}
+body form .form-box .predict-btn:hover+.predict-hint {
+  display: block;
+}
+
+body form .form-box .search-btn {
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 1);
+  border-radius: 50%;
+  border: none;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  transform: translate(0, -50%);
+  justify-content: center;
+  align-items: center;
+}
+body form .form-box .search-btn:enabled:hover {
+  cursor: pointer;
+  background: none;
+  color: white;
+}
+body form .form-box .hint-txt {
+  display: none;
+  padding-top: 5px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  position: absolute;
+  width: 29em;
+  text-align: center;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+body form .valueBox {
+  display: none;
+  padding: 40px 40px;
+  font-family: 'Optima', 'Hei';
+  width: 60%;
+  height: 50%;
+  position: absolute;
+  border-radius: 20px;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: .4s;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+}
+body form .valueBox .Input {
+  padding-top: 20px;
+}
+body form .valueBox .Input select, input {
+  font-size: 16px;
+  border: 0;
+  border-radius: 0;
+  background: 0;
+  outline: 0;
+  color: #fff;
+  display: inline;
+  padding: 5px 0;
+  transition: .2s;
+  border-bottom: 1px solid rgb(199, 191, 219);
+}
+body form .valueBox .Input select:hover, input:hover {
+  border-bottom-color: #fff;
+}
+
+body form .valueBox .Input .attrInput {
+  width: 60%;
+}
+
+body form .valueBox .Input .valueInput {
+  width: 25%;
+}
+
+body form .valueBox .Input button {
+  background-color: rgba(0, 0, 0, 0);
+  color: #ffffff;
+  border: none;
+  height: 30px;
+  width: 30px;
+  justify-content: right;
+  align-items: right;
+}
+
+body form .search-info {
+  display: none;
+  padding: 0 20px;
+  width: 60%;
+  height: 50%;
+  position: absolute;
+  border-radius: 20px;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: .4s;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+}
+.close-btn {
+  background: none;
+  color: #ffffff;
+  border-radius: 50%;
+  border: none;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+.close-btn:hover{
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.2);
+}
+body form .search-info .close-btn:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+ul {
+  position: absolute;
+  left: 0%;
+  list-style: none;
+}
+ul li {
+  float: left;
+  text-align: center;
+  padding: 5px 10px 5px 10px;
+}
+ul li a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+ul li a:hover {
+  cursor: pointer;
+}
+
+#tab1:target, #tab2:target, #tab3:target, #tab4:target, #tab5:target {
+  z-index: 2;
+}
+
+body form .search-info .infoHolder {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+}
+body form .search-info .infoHolder h1 {
+  color: #ffffff;
+}
+body form .search-info .infoHolder .tags {
+  color: #ffffff;
+}

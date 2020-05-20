@@ -1,0 +1,9 @@
+risk原始数据，预处理填0
+risk_pre 预处理，修改单位不一
+-risk_p_add合并is_brap和is_punish
+--risk_p_a_n合并后归一化
+-risk_norm 直接归一化
+
+合并前
+meanshift
+参数bandwidth在0.5以上效果奇差，百分之99以上在同一类，区分性小

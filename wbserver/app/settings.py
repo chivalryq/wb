@@ -1,0 +1,2 @@
+SQLALCHEMY_DATABASE_URI = 'mysql://root:@Qzp000209@localhost/wbdb' #数据库设置
+SQLALCHEMY_TRACK_MODIFICATIONS= True
