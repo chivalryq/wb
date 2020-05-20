@@ -1,6 +1,7 @@
 from .utils import read_pickle
 import sklearn.cluster as slc
 import pandas as pd
+
 def predict_honesty(is_justice_creditaic=0,is_justice_credit=0,is_kcont=0):
    
    #数据预处理,与之前预处理的流程一致
@@ -31,9 +32,57 @@ def get_honesty_tag(res):
       return tags[res]
    return '企业诚信度预测标签超过预设'
 
+def predict_scale(regcap=0, investnum=0, branchnum=0, empnum=0):
+    # 数据预处理,与之前预处理的流程一致
+    # 归一化
+    Max = [12000000, 13, 22, 216]
+    Min = [0, 0, 0, 0]
+    data = [regcap, investnum, branchnum, empnum]
+    pre_process_data = [(data[i] - Min[i]) / (Max[i] - Min[i]) for i in range(4)]
+    # 读取保存的模型
+    model = read_pickle('./wbserver/data/scale.pkl')
+
+    # 新数据集，即刚传入的数据
+    X = pd.DataFrame({"regcap": [pre_process_data[0]],
+                      "investnum": [pre_process_data[1]],
+                      "branchnum": [pre_process_data[2]],
+                      "empnum": [pre_process_data[3]]})
+    # print(X)
+    result = model.predict(X.values)
+
+    # 将结果处理为标签，这里result只有一个值
+    tag = get_scale_tag(result[0])
+    return tag
+
+
+def get_scale_tag(res):
+    if res >= 0 and res <= 2:
+        tags = ['企业规模小', '企业规模大', '企业规模中等']
+        return tags[res]
+    return '企业规模预测标签超过预设'
+
+def predict_competition(passpercent=0, bidnum=0, is_infob=0, is_infoa=0):
+    # 独热编码
+    if is_infoa == 0:
+        is_infoa_1 = 1
+        is_infoa_2 = 0
+    if is_infoa == 1:
+        is_infoa_1 = 0
+        is_infoa_2 = 1
+    tags = ['竞争力一般', '竞争力弱', '竞争力强']
+    if (passpercent >= 0.75) and (passpercent <= 1) and (bidnum >= 0) and (bidnum <= 1) and (is_infob >= 1) and (is_infob <= 2) and (is_infoa_1 >= 0) and (is_infoa_1 <= 1) and (is_infoa_2 >= 0) and (is_infoa_2 <= 1):
+        return tags[2]
+    elif (passpercent >= 0) and (passpercent <= 0.5) and (bidnum == 0) and (is_infob == 0) and (is_infoa_1 == 1) and (is_infoa_2 == 0):
+        return tags[1]
+    elif (passpercent >= 0.6) and (passpercent <= 1) and (bidnum >= 0) and (bidnum <= 123) and (is_infob == 0) and (is_infoa_1 >= 0) and (is_infoa_1 <= 1) and (is_infoa_2 >= 0) and (is_infoa_2 <= 1):
+        return tags[0]
+    return '企业竞争力预测标签超过预设'
+
 if __name__ == "__main__":
    #这里找一个你知道的原始数据+标签做测试数据
-   if predict_honesty(0,20,0)=='企业诚信度低':
+   if predict_honesty(0,20,0)=='企业诚信度低' \
+      and  predict_competition(0.940380313, 1, 0, 0) == '竞争力一般' \
+      and predict_scale(5010000, 0, 0, 8) == '企业规模大':
       print("test succeeds")
    else:
       print("test fails")
