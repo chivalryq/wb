@@ -1,6 +1,7 @@
 from . import app
 from flask import request,jsonify,render_template,request
 from .predict import *
+from .settings import ROOT_PATH
 @app.route('/')
 def index():
     return str(app.url_map)
@@ -24,18 +25,14 @@ def tags():
         tags[entnames[i]]=all_tags[i]
     return str(tags).replace("'",'"')
     # return jsonify(tags=tags)
-@app.route('/query')
-def query():
-    page=''
-    with open('templates/index.html') as f:
-        return page.join(f.readlines())
+
 
 @app.route('/predict')
 def predict():
 
     tags=[]
     
-    data=request.values['data']
+    data=request.values.get('data',{})
     
     is_justice_creditaic=data.get('is_justice_creditaic',0)
     is_justice_credit=data.get('is_justice_credit',0)
@@ -61,5 +58,5 @@ def predict():
     is_infob=data.get('is_infob',0)
     is_infoa=data.get('is_infoa',0)
     tags.append(predict_competition(passpercent,bidnum,is_infob,is_infoa))
-    
+
     return jsonify(tags=tags)
