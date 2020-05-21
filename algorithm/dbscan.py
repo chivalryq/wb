@@ -10,6 +10,7 @@ import mpl_toolkits.mplot3d
 from sklearn.preprocessing import StandardScaler
 
 from .utils import check
+from .mk_pickle import make_pickle
 
 # 对类别进行统计,输出一个包含类别和数目信息的字典
 def tallyClusters(Clist):
@@ -164,6 +165,10 @@ def main():
 				print("[轮廓系数]:",skl_silScore(data,result))
 				print('[Calinski-Harabasz指数]:',skl_calScore(data,result))
 				plt.show()
+				#持久化该模型
+				pkl_filename=sys.argv[pos].split('.')[0]+'.pkl'
+				make_pickle(sorter,pkl_filename)
+				print("模型已保存至"+pkl_filename)
 			else:
 				if check(sys.argv[3]) in (float,int) and check(sys.argv[4]) in (float,int) and float(sys.argv[3])<float(sys.argv[4]) and\
 				check(sys.argv[5]) in (float,int) and check(sys.argv[6]) in (float,int) and float(sys.argv[5])<float(sys.argv[6]) :

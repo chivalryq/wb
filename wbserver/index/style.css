@@ -233,3 +233,6 @@ body form .search-info .infoHolder h1 {
 body form .search-info .infoHolder .tags {
   color: #ffffff;
 }
+body form .valueBox .Input option {
+  color: #000000;
+}
